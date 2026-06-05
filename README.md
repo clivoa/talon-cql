@@ -4,6 +4,8 @@
 
 Threat hunters who document their work in Obsidian — playbooks, runbooks, DFIR notes — can now get proper syntax highlighting for embedded CQL queries. No equivalent plugin exists in the Obsidian community.
 
+![Talon CQL syntax highlighting](assets/screenshot.png)
+
 ---
 
 ## Usage
