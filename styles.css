@@ -1,0 +1,93 @@
+/* Talon CQL — syntax highlighting for CrowdStrike LogScale */
+
+.cql-wrapper {
+	position: relative;
+}
+
+.cql-controls {
+	position: absolute;
+	top: 0.4em;
+	right: 0.6em;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 0.3em;
+	z-index: 1;
+}
+
+.cql-flair {
+	font-size: 0.75em;
+	color: var(--text-muted, #6b7280);
+	font-family: var(--font-monospace, monospace);
+	pointer-events: none;
+	user-select: none;
+}
+
+.cql-copy-btn {
+	display: none;
+	padding: 0.15em 0.6em;
+	font-size: 0.75em;
+	font-family: var(--font-interface, sans-serif);
+	color: var(--text-muted, #9ca3af);
+	background: var(--background-modifier-hover, rgba(255,255,255,0.08));
+	border: 1px solid var(--background-modifier-border, rgba(255,255,255,0.12));
+	border-radius: 4px;
+	cursor: pointer;
+	transition: color 0.15s, background 0.15s;
+}
+
+.cql-copy-btn:hover {
+	color: var(--text-normal, #e2e8f0);
+	background: var(--background-modifier-hover, rgba(255,255,255,0.14));
+}
+
+.cql-copy-btn--success {
+	color: #86efac !important;
+}
+
+.cql-wrapper:hover .cql-copy-btn {
+	display: block;
+}
+
+.cql-block {
+	font-family: var(--font-monospace, monospace);
+	font-size: var(--code-size, 0.9em);
+	line-height: 1.6;
+	padding: 1em;
+	border-radius: 6px;
+	background-color: var(--code-background, #1e1e2e);
+	overflow-x: auto;
+	margin: 0;
+}
+
+.cql-block code {
+	background: none;
+	padding: 0;
+	font-size: inherit;
+}
+
+/* Dark theme — prefixed with .cql-block to beat Obsidian's code specificity */
+.cql-block .cql-comment            { color: #6b7280; font-style: italic; }
+.cql-block .cql-string             { color: #86efac; }
+.cql-block .cql-regex              { color: #fdba74; }
+.cql-block .cql-event-field        { color: #d8b4fe; font-weight: 600; }
+.cql-block .cql-pipe               { color: #e2e8f0; font-weight: 700; }
+.cql-block .cql-operator           { color: #94a3b8; }
+.cql-block .cql-number             { color: #67e8f9; }
+.cql-block .cql-keyword            { color: #fca5a5; font-weight: 600; }
+.cql-block .cql-function           { color: #93c5fd; }
+.cql-block .cql-namespace-function { color: #fde047; }
+.cql-block .cql-field              { color: #e2e8f0; }
+
+/* Light theme overrides */
+.theme-light .cql-block .cql-comment            { color: #6b7280; }
+.theme-light .cql-block .cql-string             { color: #16a34a; }
+.theme-light .cql-block .cql-regex              { color: #c2410c; }
+.theme-light .cql-block .cql-event-field        { color: #7c3aed; }
+.theme-light .cql-block .cql-pipe               { color: #1e293b; }
+.theme-light .cql-block .cql-operator           { color: #475569; }
+.theme-light .cql-block .cql-number             { color: #0e7490; }
+.theme-light .cql-block .cql-keyword            { color: #b91c1c; }
+.theme-light .cql-block .cql-function           { color: #1d4ed8; }
+.theme-light .cql-block .cql-namespace-function { color: #92400e; }
+.theme-light .cql-block .cql-field              { color: #1e293b; }

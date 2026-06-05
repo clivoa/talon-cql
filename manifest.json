@@ -1,0 +1,10 @@
+{
+  "id": "talon-cql",
+  "name": "Talon CQL",
+  "version": "0.1.0",
+  "minAppVersion": "1.0.0",
+  "description": "Syntax highlighting for CrowdStrike CQL (LogScale Query Language) in code blocks.",
+  "author": "Caio Lopes",
+  "authorUrl": "https://github.com/clivoa",
+  "isDesktopOnly": false
+}
