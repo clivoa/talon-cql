@@ -41,8 +41,9 @@
 	background: var(--background-modifier-hover, rgba(255,255,255,0.14));
 }
 
-.cql-copy-btn--success {
-	color: #86efac !important;
+.cql-copy-btn.cql-copy-btn--success,
+.cql-copy-btn.cql-copy-btn--success:hover {
+	color: #86efac;
 }
 
 .cql-wrapper:hover .cql-copy-btn {
@@ -58,6 +59,7 @@
 	background-color: var(--code-background, #1e1e2e);
 	overflow-x: auto;
 	margin: 0;
+	cursor: text;
 }
 
 .cql-block code {

@@ -154,26 +154,26 @@ const TOKEN_CLASS: Record<string, string> = {
 };
 
 export function highlightCQL(source: string, label = "CQL"): HTMLElement {
-	const wrapper = document.createElement("div");
+	const wrapper = activeDocument.createElement("div");
 	wrapper.className = "cql-wrapper";
 
 	// Controls: label + copy button stacked in top-right corner
-	const controls = document.createElement("div");
+	const controls = activeDocument.createElement("div");
 	controls.className = "cql-controls";
 
-	const flair = document.createElement("div");
+	const flair = activeDocument.createElement("div");
 	flair.className = "cql-flair";
 	flair.textContent = label;
 	controls.appendChild(flair);
 
-	const copyBtn = document.createElement("button");
+	const copyBtn = activeDocument.createElement("button");
 	copyBtn.className = "cql-copy-btn";
 	copyBtn.textContent = "Copy";
 	copyBtn.addEventListener("click", () => {
-		navigator.clipboard.writeText(source).then(() => {
+		void navigator.clipboard.writeText(source).then(() => {
 			copyBtn.textContent = "Copied!";
 			copyBtn.classList.add("cql-copy-btn--success");
-			setTimeout(() => {
+			activeWindow.setTimeout(() => {
 				copyBtn.textContent = "Copy";
 				copyBtn.classList.remove("cql-copy-btn--success");
 			}, 2000);
@@ -183,18 +183,18 @@ export function highlightCQL(source: string, label = "CQL"): HTMLElement {
 
 	wrapper.appendChild(controls);
 
-	const pre = document.createElement("pre");
+	const pre = activeDocument.createElement("pre");
 	pre.className = "cql-block";
 	wrapper.appendChild(pre);
 
-	const code = document.createElement("code");
+	const code = activeDocument.createElement("code");
 	pre.appendChild(code);
 
 	const lines = source.split("\n");
 	for (let i = 0; i < lines.length; i++) {
 		appendLine(code, lines[i]);
 		if (i < lines.length - 1) {
-			code.appendChild(document.createTextNode("\n"));
+			code.appendChild(activeDocument.createTextNode("\n"));
 		}
 	}
 
@@ -208,7 +208,7 @@ function appendLine(parent: HTMLElement, line: string) {
 		if (/\s/.test(line[pos])) {
 			const start = pos;
 			while (pos < line.length && /\s/.test(line[pos])) pos++;
-			parent.appendChild(document.createTextNode(line.slice(start, pos)));
+			parent.appendChild(activeDocument.createTextNode(line.slice(start, pos)));
 			continue;
 		}
 
@@ -217,18 +217,18 @@ function appendLine(parent: HTMLElement, line: string) {
 
 		// Safety: if tokenizer stalled, advance one char
 		if (tok.end <= pos) {
-			parent.appendChild(document.createTextNode(line[pos]));
+			parent.appendChild(activeDocument.createTextNode(line[pos]));
 			pos++;
 			continue;
 		}
 
 		if (tok.type && TOKEN_CLASS[tok.type]) {
-			const span = document.createElement("span");
+			const span = activeDocument.createElement("span");
 			span.className = TOKEN_CLASS[tok.type];
 			span.textContent = text;
 			parent.appendChild(span);
 		} else {
-			parent.appendChild(document.createTextNode(text));
+			parent.appendChild(activeDocument.createTextNode(text));
 		}
 
 		pos = tok.end;
