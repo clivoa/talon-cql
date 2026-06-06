@@ -27,9 +27,9 @@ Works in both **reading mode** and **editing mode**.
 
 ## Install
 
-### Community Plugin *(pending approval)*
+### Community Plugin
 
-Search for **Talon CQL** in **Settings → Community Plugins**.
+Install from the [Obsidian Community Plugins directory](https://community.obsidian.md/plugins/talon-cql), or search for **Talon CQL** in **Settings → Community Plugins**.
 
 ### Manual
 
@@ -80,6 +80,7 @@ npm run dev     # watch mode for development
 
 ## References
 
+- [Talon CQL on Obsidian Community Plugins](https://community.obsidian.md/plugins/talon-cql)
 - [CQL Syntax Reference](https://library.humio.com/data-analysis/syntax.html)
 - [LogScale Functions](https://library.humio.com/data-analysis/functions.html)
 - [CrowdStrike LogScale Community Content](https://github.com/CrowdStrike/logscale-community-content)

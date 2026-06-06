@@ -1,8 +1,15 @@
 export const CQL_KEYWORDS = new Set([
+	// Control flow
 	"case", "when", "then", "else", "end",
+	// Logical operators
 	"and", "AND", "or", "OR", "not", "NOT",
-	"in", "as", "by", "on", "with",
-	"asc", "desc", "limit", "span", "function",
+	// Clause keywords
+	"in", "as", "by", "on", "with", "asc", "desc",
+	// Common named parameters
+	"limit", "span", "function", "order", "include",
+	"ignoreCase", "negate", "distinct", "strict",
+	"timezone", "precision", "locale", "replaceEmpty",
+	"column", "separator", "charset", "radix",
 ]);
 
 export const CQL_FUNCTIONS = new Set([
@@ -37,7 +44,7 @@ export const CQL_NAMESPACES = new Set([
 type TokenType =
 	| "comment" | "string" | "regex" | "event-field"
 	| "pipe" | "operator" | "number" | "keyword"
-	| "namespace-function" | "function" | "field" | null;
+	| "namespace-function" | "function" | "cs-field" | "field" | null;
 
 interface Token {
 	type: TokenType;
@@ -132,6 +139,8 @@ export function nextToken(line: string, pos: number): Token {
 
 		if (CQL_KEYWORDS.has(word)) return { type: "keyword", end: after };
 		if (CQL_FUNCTIONS.has(word)) return { type: "function", end: after };
+		// PascalCase = CrowdStrike event field or value (ImageFileName, ComputerName, ProcessRollup2…)
+		if (/^[A-Z]/.test(word)) return { type: "cs-field", end: after };
 		return { type: "field", end: after };
 	}
 
@@ -142,6 +151,7 @@ export function nextToken(line: string, pos: number): Token {
 const TOKEN_CLASS: Record<string, string> = {
 	"comment":            "cql-comment",
 	"string":             "cql-string",
+	"cs-field":           "cql-cs-field",
 	"regex":              "cql-regex",
 	"event-field":        "cql-event-field",
 	"pipe":               "cql-pipe",
@@ -173,7 +183,7 @@ export function highlightCQL(source: string, label = "CQL"): HTMLElement {
 		void navigator.clipboard.writeText(source).then(() => {
 			copyBtn.textContent = "Copied!";
 			copyBtn.classList.add("cql-copy-btn--success");
-			activeWindow.setTimeout(() => {
+			window.setTimeout(() => {
 				copyBtn.textContent = "Copy";
 				copyBtn.classList.remove("cql-copy-btn--success");
 			}, 2000);
